@@ -34,6 +34,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
         this.getContentPane().setBackground(Color.blue);
         AutoID();
     }
+    String flightID;
 public void AutoID(){
         try {
             Connection con; 
@@ -89,11 +90,11 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
         jLabel15 = new javax.swing.JLabel();
         lastname = new javax.swing.JTextField();
         custID = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        Ans = new javax.swing.JTextField();
         firstname = new javax.swing.JTextField();
         contact = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        fare = new javax.swing.JTextField();
+        totalTickets = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -195,6 +196,11 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
                 "Flight ID", "Flight Name", "Arrival", "Departure", "Duration", "Date"
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
@@ -257,9 +263,9 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        Ans.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                AnsActionPerformed(evt);
             }
         });
 
@@ -275,15 +281,15 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
             }
         });
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        fare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                fareActionPerformed(evt);
             }
         });
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        totalTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                totalTicketsActionPerformed(evt);
             }
         });
 
@@ -349,13 +355,13 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel15))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Ans, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(125, 125, 125)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
@@ -374,10 +380,10 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel11))
                                 .addGap(101, 101, 101)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(179, Short.MAX_VALUE))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fare, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                                    .addComponent(totalTickets))))
+                        .addGap(168, 168, 168))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(470, Short.MAX_VALUE)
@@ -416,7 +422,7 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalTickets, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -425,13 +431,13 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Ans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -563,17 +569,17 @@ long id = Long.parseLong(rs.getString("MAX(TicketID)").substring(2, rs.getString
         // TODO add your handling code here:
     }//GEN-LAST:event_custIDActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void AnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_AnsActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void fareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fareActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_fareActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void totalTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTicketsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_totalTicketsActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
@@ -620,10 +626,60 @@ firstname.setText(rs.getString("FirstName"));
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        int Fare=Integer.parseInt(fare.getText());
+        int NoOfTickets=Integer.parseInt(totalTickets.getText());
+        int ans=Fare*NoOfTickets;
+        Ans.setText(String.valueOf(ans));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+     try {
+    // Retrieving input values
+    String CustomerID = custID.getText();
+    String FirstName = firstname.getText();
+    String LastName = lastname.getText();
+    String Contact = contact.getText();
+    String Gender = gender.getText();
+    String Arrival = arrival.getSelectedItem().toString();
+    String Departure = departure.getSelectedItem().toString();
+    String TicketID = ID.getText();
+
+    // Database connection
+    Connection con;
+    PreparedStatement pre;
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    con = DriverManager.getConnection("jdbc:mysql://localhost/airline_project", "root", "shaikabdulhameed");
+
+    // SQL query to insert data
+    pre = con.prepareStatement("INSERT INTO ticket (TicketID, FlightID, CustomerID, Arrival, Departure, FirstName, LastName, Contact, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    // Setting parameters for the query
+    pre.setString(1, TicketID);
+    pre.setString(2, flightID); // Replace with actual FlightID value
+    pre.setString(3, CustomerID);
+    pre.setString(4, Arrival);
+    pre.setString(5, Departure);
+    pre.setString(6, FirstName);
+    pre.setString(7, LastName);
+    pre.setString(8, Contact);
+    pre.setString(9, Gender);
+
+    // Executing the query
+    pre.executeUpdate();
+JOptionPane.showMessageDialog(null,"Ticket Booked Successfully");
+    // Closing resources
+    pre.close();
+    con.close();
+
+    System.out.println("Ticket booked successfully!");
+
+} catch (ClassNotFoundException ex) {
+    Logger.getLogger(BookTicket.class.getName()).log(Level.SEVERE, null, ex);
+} catch (SQLException ex) {
+    Logger.getLogger(BookTicket.class.getName()).log(Level.SEVERE, null, ex);
+}
+
+                 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed
@@ -638,13 +694,37 @@ firstname.setText(rs.getString("FirstName"));
         // TODO add your handling code here:
     }//GEN-LAST:event_firstnameActionPerformed
 
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        try {
+            // TODO add your handling code here:
+            int col=0;
+            int row=table.getSelectedRow();
+            flightID=table.getModel().getValueAt(row,col).toString();
+            Connection con;
+            PreparedStatement pre;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost/airline_project","root","shaikabdulhameed");
+            pre=con.prepareStatement("select Fare from Flight where FlightID=?");
+            pre.setString(1,flightID);
+            ResultSet rs=pre.executeQuery();
+            rs.next();
+            fare.setText(rs.getString("Fare"));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BookTicket.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BookTicket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tableMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Ans;
     private javax.swing.JLabel ID;
     private javax.swing.JComboBox<String> arrival;
     private javax.swing.JTextField contact;
     private javax.swing.JTextField custID;
     private javax.swing.JComboBox<String> departure;
+    private javax.swing.JTextField fare;
     private javax.swing.JTextField firstname;
     private javax.swing.JTextField gender;
     private javax.swing.JButton jButton1;
@@ -669,11 +749,9 @@ firstname.setText(rs.getString("FirstName"));
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField lastname;
     private javax.swing.JTable table;
+    private javax.swing.JTextField totalTickets;
     // End of variables declaration//GEN-END:variables
 }
